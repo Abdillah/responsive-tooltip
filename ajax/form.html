@@ -1,13 +1,16 @@
 <form>
-    <label for="RMFtooltip_text">Enter the tile (the text you hover on)</label>
-    <input type="text" name="RMFtooltip_text" id="RMFtooltip_text" value="text" class="text ui-widget-content ui-corner-all" />
-    <br />
-    <label for="RMFtooltip_tip">Enter the tip (the popup text)</label>
-    <input type="text" name="RMFtooltip_tip" id="RMFtooltip_tip" value="tip" class="text ui-widget-content ui-corner-all" />
+    <label for="RMFtooltip_tip">Enter the tip text (the popup text)</label>
+    <input type="text" name="RMFtooltip_tip" id="RMFtooltip_tip" placeholder="Tips" class="text ui-widget-content ui-corner-all" />
 </form>
 <style>
+.ui-dialog {
+	border-radius: 2px;
+	border: 1px solid #ddd;
+	box-shadow: 2px 2px 5px #ddd;
+}
 .ui-dialog>* {
   padding-left: 10px;
+  padding-right: 10px;
 }
 .ui-dialog-title {
   color: #464646;
@@ -26,7 +29,15 @@
   margin-bottom: 10px;
 }
 .ui-button-text-only {
-  width: 25%;
-  margin: 3px 12.5% 3px !important;
+  width: calc(49% - 5px);
+  margin: 0px 1% 5px 1% !important;
+}
+
+#RMFtooltip_tip {
+	width: 100%;
 }
 </style>
+
+<script>
+jQuery('#RMFtooltip_tip').focus();
+</script>

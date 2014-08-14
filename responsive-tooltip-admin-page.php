@@ -1,7 +1,7 @@
 <?php
 //-------------- Register the menu page ------------------------
 function RMFtooltip_admin_menu() {  
-    add_options_page("Responsive Mobile-Friendly Tooltip Settings", "Responsive Mobile-Friendly Tooltip", "manage_options", "RMFtooltip-options", "RMFtooltip_admin_page");  
+    add_options_page("Responsive Mobile-Friendly Tooltip Settings", "Responsive Tooltip", "manage_options", "RMFtooltip-options", "RMFtooltip_admin_page");  
 }
 add_action('admin_menu', 'RMFtooltip_admin_menu');
 //--Creating the page
@@ -9,14 +9,15 @@ function RMFtooltip_admin_page () { ?>
 	<script type="text/javascript">
 		function chkchng(){ //Disable input fields as needed
 			if(jQuery('#chkbx_use_custom_css').is(":checked")) {
-				jQuery('#chkbx_replace_css').prop('disabled', false);
+				// : jQuery('#chkbx_replace_css').prop('disabled', false);
 				jQuery('#textarea_css').prop('disabled', false);
 			} else if (!jQuery('#chkbx_use_custom_css').is(":checked")) {
-				jQuery('#chkbx_replace_css').prop('disabled', true);
+				// : jQuery('#chkbx_replace_css').prop('disabled', true);
 				jQuery('#textarea_css').prop('disabled', true);
 			}
 		}
 	</script>
+	<!--script src=<?php /*echo file_get_contents(plugin_dir_path(__FILE__) . 'responsive-tooltip.js');*/ ?> type="text/javascript" ></script-->
 	<div class="wrap">
 		<?php screen_icon(); ?>
 		<h2>Responsive Mobile-Friendly Tooltip Settings</h2>
@@ -47,12 +48,14 @@ function RMFtooltip_admin_init(){
 			}
 			/*----------Save css to file------------*/
 			if ($input[chkbx_use_custom_css] == 'on') {
-			   if ($input[chkbx_replace_css] == 'on') {
-			    	$css_file = $input[textarea_css]; //Writes only the new changes
-			    } else {
-			  		$css_file = file_get_contents(plugin_dir_path(__FILE__) . 'responsive-tooltip.org.css');
-				    $css_file .= "\n{$input[textarea_css]}"; //Adds the entered code at the end of the original code
-			    }
+		    	$css_file = $input[textarea_css]; //Writes only the new changes
+
+				// : if ($input[chkbx_replace_css] == 'on') {
+					// : $css_file = $input[textarea_css]; //Writes only the new changes
+				// : } else {
+					// : $css_file = file_get_contents(plugin_dir_path(__FILE__) . 'responsive-tooltip.org.css');
+					// : $css_file .= "\n{$input[textarea_css]}"; //Adds the entered code at the end of the original code
+				// : }
 			} else { //Else writes the original file
 				$css_file = file_get_contents(plugin_dir_path(__FILE__) . 'responsive-tooltip.org.css'); //Writes only the original file
 			}
@@ -91,9 +94,10 @@ function RMFtooltip_admin_init(){
 				</tr>
 				<?php
 			}
-		add_settings_field('chkbx_replace_css', '', 'chkbx_replace_css_func', 'RMFtooltip-options', 'RMFtooltip_style_settings'); //Create second checkbox
+		/* add_settings_field('chkbx_replace_css', '', 'chkbx_replace_css_func', 'RMFtooltip-options', 'RMFtooltip_style_settings'); //Create second checkbox
 			function chkbx_replace_css_func () {
 				global $RMFtooltip_style_settings; ?>
+				<!--
 				<tr valign="top">
 					<th scope="row">
 						<label for="chkbx_replace_css">Replace original CSS?</label>
@@ -103,8 +107,9 @@ function RMFtooltip_admin_init(){
 						<p class="description">Check if want to replace the default CSS rules rather than add to them</p>
 					</td>
 				</tr>
+				-->
 				<?php
-			}
+			} */
 		add_settings_field('textarea_css', '', 'textarea_css_func', 'RMFtooltip-options', 'RMFtooltip_style_settings'); //Creates the textarea 
 			function textarea_css_func () {
 				global $RMFtooltip_style_settings; ?>
@@ -113,7 +118,27 @@ function RMFtooltip_admin_init(){
 						<label for="textarea_css">Your CSS code</label>
 					</th>
 					<td>
-						<textarea id="textarea_css" class="large-text" name="RMFtooltip_style_settings[textarea_css]" cols="50" rows="15" placeholder="Enter your css code here" <?php disabled( $RMFtooltip_style_settings[chkbx_use_custom_css], 'off'); ?> ><?php echo esc_textarea( $RMFtooltip_style_settings[textarea_css] ); ?></textarea>
+						<textarea id="textarea_css" class="large-text code" name="RMFtooltip_style_settings[textarea_css]" cols="50" rows="15" placeholder="Enter your css code here" <?php disabled( $RMFtooltip_style_settings[chkbx_use_custom_css], 'off'); ?> <?php echo esc_textarea( $RMFtooltip_style_settings[textarea_css] ); ?> >
+							<?php echo file_get_contents(plugin_dir_path(__FILE__) . 'responsive-tooltip.css'); ?>
+						</textarea>
+					</td>
+				</tr>
+				<?php
+			}
+
+		add_settings_field('tooltip_demo', '', 'tooltip_demo_init', 'RMFtooltip-options', 'RMFtooltip_style_settings'); //Creates the demo area 
+			function tooltip_demo_init () {
+				global $RMFtooltip_style_settings; 
+				
+				RMFtooltip_stylesheet_js(); ?>
+				<tr valign="top">
+					<th scope="row">
+						<label for="textarea_css">Demo Tooltip</label>
+					</th>
+					<td>
+						<div style="border: 1px solid #000; padding: 20px; width: calc(100% - 50px);">
+							Hover on text to show a <abbr title="A responsive tooltip :)" rel="tooltip">Responsive Tooltip</abbr>.
+						</div>
 					</td>
 				</tr>
 				<?php

@@ -1,9 +1,9 @@
 === Plugin Name ===
-Contributors: ItayXD
+Contributors: ItayXD, mirkolofio <mirkolofio@gmail.com>, abdillah <abdillah96.bu@gmail.com>
 Tags: Tooltip, tinyMCE, responsive, mobile-friendly
 Requires at least: 3.0.1
-Tested up to: 3.5.1
-Stable tag: 1.3
+Tested up to: 3.8
+Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,7 @@ tooltips are used to present a tiny amount of hidden content (mainly explanatory
 *	It's responsive. It relies on a maximum width value when viewed on large screens, adopts to narrow environments and picks the best viewable position relatively to the target (top, bottom; left, center, right).
 *	It's mobile-friendly. It pops up when a call-to-action button is tapped and disappears when tapped on the tooltip itself.
 *	It's HTML formatting capable. Need to write some words in italic or so? No problem, this will work out.
-*	It's extremely easy to use: A tooltip button in added to the default WordPress editor, all you have to do it click it and fill the pop-up dialog, the rest is taken care of automatically.
+*	It's extremely easy to use: A tooltip button in added to the default WordPress editor, all you have to do is select a text, click the button and fill the pop-up dialog, the rest is taken care of automatically.
 
 ###Advance
 *	The button adds a WordPress short-code, if you want the tip to be HTML formated (avoid block level elements) you can just wrap it with [tooltip tip="<your tip>"]<your text>[/tooltip] in tinyMCE.
@@ -35,7 +35,7 @@ Thanks to [Osvaldas]( http://osvaldas.info/) who made the Js and the CSS. WordPr
 
 == Frequently Asked Questions ==
 
-Non I can think of, contact for help.
+None I can think of, contact for help.
 
 == Screenshots ==
 1. The tooltip in action.
@@ -43,7 +43,24 @@ Non I can think of, contact for help.
 
 == Changelog ==
 
-= 1.2 =
+= 1.5.3 =
+* improve UX tooltip insertion
+* change theme to simple, good-looking style
+
+= 1.5.2 =
+* added the ajax folder we.. lost
+
+= 1.5.1 =
+*	Allow the "hover" attribute to provide nested shortcode available in bubble content
+*	"invert" attribute is still available but it's deprecated
+
+= 1.5 =
+*	Allow the "invert" attribute to provide nested shortcode available in bubble content
+
+= 1.4 =
+*	Nested Shortcodes in tooltip base content (not the bubble content)
+
+= 1.3 =
 *	Bug fix- Dialog underlay.
 
 = 1.2 =
